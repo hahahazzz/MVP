@@ -3,28 +3,99 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
+    productFlavors {
+        dev {
+
+        }
+    }
+
     defaultConfig {
         applicationId "com.eflashloan.wct"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 10000
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        def keystoreDir = "../signKey";
+        config {
+            File propFile = file(keystoreDir + "/eflashloan.properties")
+            def Properties prop = new Properties();
+            prop.load(new FileInputStream(propFile));
+            storeFile = file(keystoreDir + "/eflashloan.jks")
+            keyAlias = prop['keyAlias']
+            keyPassword = prop['keyPassword']
+            storePassword = prop['storePassword']
+        }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            signingConfig null
+            signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            signingConfig null
+            signingConfig signingConfigs.config
+        }
+    }
+
+    applicationVariants.all {
+        variant ->
+            variant.outputs.each {
+                output ->
+                    // 重命名产出的apk文件
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        File outputDirectory = new File(outputFile.parent);
+                        def fileName;
+                        def prod = variant.productFlavors[0];
+                        if (variant.buildType.name == "release") {
+                            File localPropertiesFile = project.rootProject.file('local.properties');
+                            if (localPropertiesFile.exists()) {
+                                Properties tempProp = new Properties()
+                                InputStream inputStream = localPropertiesFile.newDataInputStream();
+                                tempProp.load(inputStream);
+                                if (tempProp.containsKey("release.dir")) {
+                                    outputDirectory = new File(tempProp["release.dir"]);
+                                }
+                            }
+                            fileName = "wct-${prod.name}-${defaultConfig.versionName}-release.apk"
+                        } else {
+                            fileName = "wct-${prod.name}-${defaultConfig.versionName}-debug.apk"
+                        }
+                        output.outputFile = new File(outputDirectory, fileName)
+                    }
+                    // 删除unaligned apk
+                    if (output.zipAlign != null) {
+                        output.zipAlign.doLast {
+                            output.zipAlign.inputFile.delete()
+                        }
+                    }
+            }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+    compile 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
 }
