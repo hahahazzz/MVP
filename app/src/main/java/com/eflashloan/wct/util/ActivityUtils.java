@@ -1,7 +1,9 @@
 package com.eflashloan.wct.util;
 
+import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -50,15 +52,21 @@ public final class ActivityUtils {
      */
     public int finishActivity(Class<? extends AppCompatActivity> cls) {
         int finishCount = 0;
-        if (cls != null && activityStack != null) {
+        if (cls != null && activityStack != null && activityStack.size() > 0) {
             final int stackSize = activityStack.size();
+            ArrayList<AppCompatActivity> waitFinishActivityList = new ArrayList<>();
             for (int currentIndex = stackSize - 1; currentIndex >= 0; currentIndex--) {
                 AppCompatActivity currentItem = activityStack.get(currentIndex);
                 if (currentItem.getClass().equals(cls)) {
-                    boolean removed = activityStack.remove(currentItem);
-                    if (removed) {
-                        finishCount++;
-                    }
+                    waitFinishActivityList.add(currentItem);
+                }
+            }
+            finishCount = waitFinishActivityList.size();
+            if (finishCount > 0) {
+                for (int currentIndex = finishCount - 1; currentIndex >= 0; currentIndex--) {
+                    AppCompatActivity activity = waitFinishActivityList.remove(currentIndex);
+                    activityStack.remove(activity);
+                    activity.finish();
                 }
             }
         }
@@ -81,5 +89,15 @@ public final class ActivityUtils {
             }
         }
         return finishCount;
+    }
+
+    public void exit() {
+        while (activityStack.size() > 0) {
+            AppCompatActivity removeActivity = activityStack.remove(0);
+            removeActivity.finish();
+        }
+        ThreadPool.shutdownNoew();
+        Process.killProcess(Process.myPid());
+        System.exit(0);
     }
 }

@@ -6,17 +6,23 @@ package com.eflashloan.wct.base;
  * @Date : 2017/7/6 9:11
  */
 public interface BaseContract {
-    interface BaseView {
+    interface View<P extends Presenter> {
         void showLoadDialog();
 
         void cancelLoadDialog();
     }
 
-    interface BasePresenter {
+    interface Presenter<V extends View> {
+        void start();
 
+        void resume();
+
+        void pause();
+
+        void destroy();
     }
 
-    interface BaseModel {
+    interface Model {
 
     }
 }

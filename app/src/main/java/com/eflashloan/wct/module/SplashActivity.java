@@ -1,15 +1,20 @@
 package com.eflashloan.wct.module;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.eflashloan.wct.R;
+import com.eflashloan.wct.base.BaseActivity;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity<SplashContract.Presenter> implements SplashContract.View {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+    protected int getLayoutResID() {
+        return R.layout.activity_splash;
+    }
+
+    @NonNull
+    @Override
+    protected SplashContract.Presenter createPresenter() {
+        return new SplashPresenter(this);
     }
 }
