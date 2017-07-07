@@ -86,12 +86,13 @@ public class RetrofitApi implements Api {
             logBuilder.append(TAB);
             logBuilder.append(requestBody);
             logBuilder.append(LINE_SEPARATOR);
+
             logBuilder.append(responseName);
             logBuilder.append(LINE_SEPARATOR);
             logBuilder.append(TAB);
             logBuilder.append("code=").append(responseCode);
             logBuilder.append(TAB);
-            logBuilder.append("msg=").append(responseMessage);
+            logBuilder.append("message=").append(responseMessage);
             logBuilder.append(LINE_SEPARATOR);
             logBuilder.append(TAB);
             logBuilder.append("body=").append(responseBody);
