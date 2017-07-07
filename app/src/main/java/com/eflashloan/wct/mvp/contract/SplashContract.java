@@ -10,6 +10,7 @@ import com.eflashloan.wct.base.BaseContract;
 public interface SplashContract {
     interface View extends BaseContract.View {
 
+        void openDebugPage();
     }
 
     interface Presenter extends BaseContract.Presenter {

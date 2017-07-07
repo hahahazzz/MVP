@@ -8,8 +8,24 @@
     android:fitsSystemWindows="true"
     tools:context="com.eflashloan.wct.module.SplashActivity">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <android.support.v7.widget.Toolbar
+            android:fitsSystemWindows="true"
+            android:id="@+id/toolbar_splash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </android.support.design.widget.AppBarLayout>
+
     <TextView
+        android:id="@+id/text_splash_hello"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="saaaaaaaaaaaa"
+        android:textSize="@dimen/sp30"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

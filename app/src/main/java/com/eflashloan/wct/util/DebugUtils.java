@@ -22,6 +22,6 @@ public final class DebugUtils {
     }
 
     public static boolean releaseMode() {
-        return debugMode();
+        return !debugMode();
     }
 }

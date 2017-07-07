@@ -12,12 +12,15 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowSoftInputMode">stateAlwaysHidden|adjustPan</item>
         <item name="android:configChanges">keyboardHidden|orientation</item>
-        <item name="android:screenOrientation">sensorPortrait</item>
+        <item name="android:screenOrientation">portrait</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnim</item>
     </style>
 
     <style name="ActivityAnim">
-
+        <item name="android:activityCloseEnterAnimation">@anim/anim_activity_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/anim_activity_close_exit</item>
+        <item name="android:activityOpenEnterAnimation">@anim/anim_activity_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_activity_open_exit</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme">

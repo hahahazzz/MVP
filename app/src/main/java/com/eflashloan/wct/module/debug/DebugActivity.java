@@ -4,14 +4,15 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import com.eflashloan.wct.R;
 import com.eflashloan.wct.base.BaseActivity;
 import com.eflashloan.wct.mvp.contract.DebugContract;
 import com.eflashloan.wct.mvp.presenter.DebugPresenter;
+import com.eflashloan.wct.util.ResourcesUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -38,13 +39,23 @@ public class DebugActivity extends BaseActivity<DebugContract.Presenter> impleme
     }
 
     @Override
+    protected void start() {
+        setSupportToolbar(toolbarDebug);
+        tilLayout.setHintEnabled(true);
+        tilLayout.setHint(ResourcesUtils.getString(this, R.string.text_hint_target_url));
+    }
+
+    @Override
     public String getInputUrl() {
         return editUrl.getText().toString().trim();
     }
 
     @Override
-    public void showLocalSaveUrl() {
-
+    public void showLocalSaveUrl(String localSavedUrl) {
+        if (!TextUtils.isEmpty(localSavedUrl)) {
+            editUrl.setText(localSavedUrl);
+            editUrl.setSelection(localSavedUrl.length());
+        }
     }
 
     @Override
@@ -54,7 +65,7 @@ public class DebugActivity extends BaseActivity<DebugContract.Presenter> impleme
 
     @Override
     public void showSaveSuccess() {
-        Toast.makeText(act, R.string.toast_debug_url_save_success, Toast.LENGTH_SHORT).show();
+        showToast(R.string.toast_debug_url_save_success);
     }
 
     @OnClick(R.id.btn_save_url)

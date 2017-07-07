@@ -11,7 +11,7 @@ public interface DebugContract {
     interface View extends BaseContract.View {
         String getInputUrl();
 
-        void showLocalSaveUrl();
+        void showLocalSaveUrl(String localSavedUrl);
 
         boolean httpChecked();
 
