@@ -26,7 +26,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Fra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
             savedInstanceState) {
         if (contentView == null) {
-            contentView = inflater.inflate(getLayoutResID(), container, false);
+            contentView = inflater.inflate(getLayoutResId(), container, false);
             ButterKnife.bind(this, contentView);
             presenter = Preconditions.checkNotNull(createPresenter());
             presenter.start();
@@ -35,7 +35,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Fra
     }
 
     @LayoutRes
-    protected abstract int getLayoutResID();
+    protected abstract int getLayoutResId();
 
     @NonNull
     protected abstract P createPresenter();

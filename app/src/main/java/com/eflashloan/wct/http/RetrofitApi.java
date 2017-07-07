@@ -4,6 +4,7 @@ import android.icu.text.Replaceable;
 import android.icu.text.UFormat;
 
 import com.eflashloan.wct.BuildConfig;
+import com.eflashloan.wct.Contants;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -29,9 +30,6 @@ public class RetrofitApi implements Api {
     private final ApiService apiService;
     private OkHttpClient requestClient;
 
-    static {
-    }
-
     private RetrofitApi() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(30L, TimeUnit.SECONDS);
@@ -43,7 +41,7 @@ public class RetrofitApi implements Api {
         requestClient = builder.build();
         Retrofit retrofit = new Retrofit.Builder()
                 .client(requestClient)
-                .baseUrl("https://")
+                .baseUrl(Contants.API_HOST)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

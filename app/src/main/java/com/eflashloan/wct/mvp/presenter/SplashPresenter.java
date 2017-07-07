@@ -1,6 +1,7 @@
-package com.eflashloan.wct.module;
+package com.eflashloan.wct.mvp.presenter;
 
 import com.eflashloan.wct.base.BasePresenter;
+import com.eflashloan.wct.mvp.contract.SplashContract;
 
 /**
  * @Author : QiuGang

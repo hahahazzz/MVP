@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Preconditions;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.eflashloan.wct.BuildConfig;
 import com.eflashloan.wct.R;
@@ -45,7 +47,7 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends App
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutResID());
+        setContentView(getLayoutResId());
         ButterKnife.bind(this);
         presenter = createPresenter();
         presenter = Preconditions.checkNotNull(presenter);
@@ -55,7 +57,7 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends App
     }
 
     @LayoutRes
-    protected abstract int getLayoutResID();
+    protected abstract int getLayoutResId();
 
     @NonNull
     protected abstract P createPresenter();
@@ -92,6 +94,32 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends App
         if (loadDialogCount <= 0 && loadDialog != null) {
             loadDialog.cancel();
         }
+    }
+
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(act, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showToast(int msgId) {
+        Toast.makeText(act, msgId, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showSnack(String msg, int actionResId, final Runnable action) {
+        View view = findViewById(android.R.id.content);
+        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).setAction(actionResId, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                action.run();
+            }
+        }).show();
+    }
+
+    @Override
+    public void close() {
+        finish();
     }
 
     @Override

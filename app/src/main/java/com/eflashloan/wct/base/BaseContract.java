@@ -10,6 +10,14 @@ public interface BaseContract {
         void showLoadDialog();
 
         void cancelLoadDialog();
+
+        void showToast(int msgId);
+
+        void showToast(String msg);
+
+        void showSnack(String msg, int actionResId, Runnable action);
+
+        void close();
     }
 
     interface Presenter<V extends View> {

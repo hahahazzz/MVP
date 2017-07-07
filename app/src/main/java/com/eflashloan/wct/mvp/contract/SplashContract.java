@@ -1,4 +1,4 @@
-package com.eflashloan.wct.module;
+package com.eflashloan.wct.mvp.contract;
 
 import com.eflashloan.wct.base.BaseContract;
 

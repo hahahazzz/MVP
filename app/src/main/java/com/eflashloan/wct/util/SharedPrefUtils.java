@@ -41,6 +41,11 @@ public final class SharedPrefUtils {
         save(editor, apply);
     }
 
+    public static void remove(String key) {
+        SharedPreferences.Editor editor = SHARED_PREFERENCES.edit().remove(key);
+        save(editor, false);
+    }
+
     private static void save(SharedPreferences.Editor editor, boolean apply) {
         if (apply) {
             editor.apply();

@@ -24,6 +24,9 @@
             android:enabled="true"
             android:exported="false"
             android:process=":remote"/>
+
+        <activity android:name=".module.debug.DebugActivity">
+        </activity>
     </application>
 
 </manifest>

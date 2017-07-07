@@ -1,4 +1,4 @@
-package com.eflashloan.wct.module.debug;
+package com.eflashloan.wct.mvp.contract;
 
 import com.eflashloan.wct.base.BaseContract;
 
@@ -9,14 +9,24 @@ import com.eflashloan.wct.base.BaseContract;
  */
 public interface DebugContract {
     interface View extends BaseContract.View {
-        String getInputUtl();
+        String getInputUrl();
 
         void showLocalSaveUrl();
+
+        boolean httpChecked();
+
+        void showSaveSuccess();
     }
 
     interface Presenter extends BaseContract.Presenter {
-        void saveDebugUrl();
+        void handleSaveButtonClickEvent();
+    }
 
-        void readLocalSavedDebugUrl();
+    interface Model extends BaseContract.Model {
+        void saveDebugUrl(String key, String value);
+
+        void clearDebugUrl(String key);
+
+        String readLocalSavedDebugUrl(String key);
     }
 }
