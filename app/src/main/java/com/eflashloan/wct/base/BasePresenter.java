@@ -1,5 +1,7 @@
 package com.eflashloan.wct.base;
 
+import com.eflashloan.wct.util.DebugUtils;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -29,12 +31,16 @@ public class BasePresenter<V extends BaseContract.View> implements BaseContract.
 
     @Override
     public void resume() {
-
+        if (DebugUtils.debugConnection()) {
+            view.close();
+        }
     }
 
     @Override
     public void pause() {
-
+        if (DebugUtils.debugConnection()) {
+            view.close();
+        }
     }
 
     @Override
