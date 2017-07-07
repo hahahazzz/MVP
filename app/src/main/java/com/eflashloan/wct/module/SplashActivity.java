@@ -43,4 +43,9 @@ public class SplashActivity extends BaseActivity<SplashContract.Presenter> imple
     public void openDebugPage() {
         startActivity(new Intent(act, DebugActivity.class));
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }
