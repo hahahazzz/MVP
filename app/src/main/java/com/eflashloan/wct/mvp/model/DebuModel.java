@@ -1,11 +1,7 @@
 package com.eflashloan.wct.mvp.model;
 
-import com.eflashloan.wct.http.Api;
-import com.eflashloan.wct.http.RetrofitApi;
 import com.eflashloan.wct.mvp.contract.DebugContract;
 import com.eflashloan.wct.util.SharedPrefUtils;
-
-import java.util.List;
 
 /**
  * @Author : QiuGang
@@ -26,6 +22,5 @@ public class DebuModel implements DebugContract.Model {
     @Override
     public String readLocalSavedDebugUrl(String key) {
         return SharedPrefUtils.get(key, "");
-        Api api = RetrofitApi.getApi();
     }
 }
