@@ -2,11 +2,13 @@ package com.eflashloan.wct.http;
 
 import android.icu.text.Replaceable;
 import android.icu.text.UFormat;
+import android.telecom.Call;
 
 import com.eflashloan.wct.BuildConfig;
 import com.eflashloan.wct.Contants;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.HttpUrl;
@@ -51,7 +53,9 @@ public class RetrofitApi implements Api {
     public static Api getApi() {
         if (api == null) {
             synchronized (RetrofitApi.class) {
-                api = new RetrofitApi();
+                if (api == null) {
+                    api = new RetrofitApi();
+                }
             }
         }
         return api;
