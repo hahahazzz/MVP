@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.eflashloan.wct.Contants;
 import com.eflashloan.wct.base.BasePresenter;
 import com.eflashloan.wct.mvp.contract.DebugContract;
-import com.eflashloan.wct.mvp.model.DebuModel;
+import com.eflashloan.wct.mvp.model.DebugModel;
 import com.eflashloan.wct.util.DebugUtils;
 import com.eflashloan.wct.util.LogUtils;
 
@@ -19,7 +19,7 @@ public class DebugPresenter extends BasePresenter<DebugContract.View> implements
 
     public DebugPresenter(DebugContract.View view) {
         super(view);
-        model = new DebuModel();
+        model = new DebugModel();
     }
 
     @Override

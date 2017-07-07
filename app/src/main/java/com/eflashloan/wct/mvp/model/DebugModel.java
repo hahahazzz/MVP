@@ -8,7 +8,7 @@ import com.eflashloan.wct.util.SharedPrefUtils;
  * @Email : 1607868475@qq.com
  * @Date : 2017/7/7 10:16
  */
-public class DebuModel implements DebugContract.Model {
+public class DebugModel implements DebugContract.Model {
     @Override
     public void saveDebugUrl(String key, String value) {
         SharedPrefUtils.save(key, value, true);
