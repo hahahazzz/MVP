@@ -30,6 +30,8 @@
         <activity
             android:name=".module.debug.DebugActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".module.home.HomeActivity">
+        </activity>
     </application>
 
 </manifest>

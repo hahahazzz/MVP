@@ -36,12 +36,12 @@ public class SplashPresenter extends BasePresenter<SplashContract.View> implemen
 
             @Override
             public void onError(@NonNull Throwable e) {
-                view.openDebugPage();
+                view.openDebugPageAndCloseSelf();
             }
 
             @Override
             public void onComplete() {
-                view.openDebugPage();
+                view.openDebugPageAndCloseSelf();
             }
         });
     }

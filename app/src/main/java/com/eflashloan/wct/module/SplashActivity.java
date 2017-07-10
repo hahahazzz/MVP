@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.eflashloan.wct.R;
 import com.eflashloan.wct.base.BaseActivity;
-import com.eflashloan.wct.module.debug.DebugActivity;
+import com.eflashloan.wct.module.home.HomeActivity;
 import com.eflashloan.wct.mvp.contract.SplashContract;
 import com.eflashloan.wct.mvp.presenter.SplashPresenter;
 
@@ -36,12 +36,13 @@ public class SplashActivity extends BaseActivity<SplashContract.Presenter> imple
 
     @OnClick({R.id.text_splash_hello})
     void click(View v) {
-        startActivity(new Intent(act, DebugActivity.class));
+        startActivity(new Intent(act, HomeActivity.class));
     }
 
     @Override
-    public void openDebugPage() {
-        startActivity(new Intent(act, DebugActivity.class));
+    public void openDebugPageAndCloseSelf() {
+        startActivity(new Intent(act, HomeActivity.class));
+        finish();
     }
 
     @Override

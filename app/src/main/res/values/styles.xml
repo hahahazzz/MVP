@@ -14,6 +14,7 @@
         <item name="android:configChanges">keyboardHidden|orientation</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnim</item>
+        <item name="toolbarStyle">@style/ToolbarStyle</item>
     </style>
 
     <style name="ActivityAnim">
@@ -21,6 +22,11 @@
         <item name="android:activityCloseExitAnimation">@anim/anim_activity_close_exit</item>
         <item name="android:activityOpenEnterAnimation">@anim/anim_activity_open_enter</item>
         <item name="android:activityOpenExitAnimation">@anim/anim_activity_open_exit</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="titleTextColor">@android:color/white</item>
+        <item name="homeAsUpIndicator">@mipmap/ic_launcher</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme">
