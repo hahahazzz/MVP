@@ -1,21 +1,14 @@
 package com.eflashloan.wct.http;
 
-import android.icu.text.Replaceable;
-import android.icu.text.UFormat;
-import android.telecom.Call;
-
 import com.eflashloan.wct.BuildConfig;
-import com.eflashloan.wct.Contants;
+import com.eflashloan.wct.Constants;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
@@ -43,7 +36,7 @@ public class RetrofitApi implements Api {
         requestClient = builder.build();
         Retrofit retrofit = new Retrofit.Builder()
                 .client(requestClient)
-                .baseUrl(Contants.API_HOST)
+                .baseUrl(Constants.API_HOST)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

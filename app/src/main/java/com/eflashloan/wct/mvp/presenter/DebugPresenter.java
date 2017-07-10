@@ -2,7 +2,7 @@ package com.eflashloan.wct.mvp.presenter;
 
 import android.text.TextUtils;
 
-import com.eflashloan.wct.Contants;
+import com.eflashloan.wct.Constants;
 import com.eflashloan.wct.base.BasePresenter;
 import com.eflashloan.wct.mvp.contract.DebugContract;
 import com.eflashloan.wct.mvp.model.DebugModel;
@@ -28,7 +28,7 @@ public class DebugPresenter extends BasePresenter<DebugContract.View> implements
             view.close();
             return;
         }
-        String localSavedUrl = model.readLocalSavedDebugUrl(Contants.LOCAL_SAVED_API_HOST);
+        String localSavedUrl = model.readLocalSavedDebugUrl(Constants.LOCAL_SAVED_API_HOST);
         view.showLocalSaveUrl(localSavedUrl);
     }
 
@@ -36,7 +36,8 @@ public class DebugPresenter extends BasePresenter<DebugContract.View> implements
     public void handleSaveButtonClickEvent() {
         String url = view.getInputUrl();
         if (TextUtils.isEmpty(url)) {
-            model.clearDebugUrl(Contants.LOCAL_SAVED_API_HOST);
+            model.clearDebugUrl(Constants.LOCAL_SAVED_API_HOST);
+            LogUtils.d("clear local saved api host");
             view.showSaveSuccess();
             return;
         }
@@ -51,8 +52,8 @@ public class DebugPresenter extends BasePresenter<DebugContract.View> implements
             url = url.substring(0, url.length() - 1);
         }
         String finalUrl = prefix + url;
-        model.saveDebugUrl(Contants.LOCAL_SAVED_API_HOST, finalUrl);
-        LogUtils.d("save url to local=" + finalUrl);
+        model.saveDebugUrl(Constants.LOCAL_SAVED_API_HOST, finalUrl);
+        LogUtils.d("save %s to local", finalUrl);
         view.showSaveSuccess();
     }
 }

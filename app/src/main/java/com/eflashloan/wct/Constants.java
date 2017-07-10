@@ -7,7 +7,7 @@ import com.eflashloan.wct.util.SharedPrefUtils;
  * @Email : 1607868475@qq.com
  * @Date : 2017/7/6 9:08
  */
-public final class Contants {
+public final class Constants {
     /**
      * 存储到本地的测试API的key
      */

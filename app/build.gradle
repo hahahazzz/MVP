@@ -6,7 +6,7 @@ android {
 
     productFlavors {
         dev {
-
+            applicationIdSuffix ".debug"
         }
     }
 
@@ -67,7 +67,8 @@ android {
                                     outputDirectory = new File(tempProp["release.dir"]);
                                 }
                             }
-                            fileName = "wct-${prod.name}-${defaultConfig.versionName}-release.apk"
+                            def time = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+                            fileName = "wct-${prod.name}-${defaultConfig.versionName}-${time}-release.apk"
                         } else {
                             fileName = "wct-${prod.name}-${defaultConfig.versionName}-debug.apk"
                         }
