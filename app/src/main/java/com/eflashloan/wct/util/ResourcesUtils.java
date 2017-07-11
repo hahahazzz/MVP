@@ -2,12 +2,14 @@ package com.eflashloan.wct.util;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 
 /**
  * @Author : QiuGang
@@ -29,5 +31,14 @@ public final class ResourcesUtils {
 
     public static int getDimen(@NonNull Context context, @DimenRes int resId) {
         return context.getResources().getDimensionPixelSize(resId);
+    }
+
+    public static void setBackground(@NonNull View view, @DrawableRes int res) {
+        Drawable drawable = getDrawable(view.getContext(), res);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackgroundDrawable(drawable);
+        } else {
+            view.setBackground(drawable);
+        }
     }
 }
