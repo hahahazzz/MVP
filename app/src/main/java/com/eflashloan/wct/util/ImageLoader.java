@@ -63,9 +63,17 @@ public final class ImageLoader {
 
     private static final class CenterInsideTransformation extends BitmapTransformation {
         private static final String ID = "com.bumptech.glide.load.resource.bitmap.CenterInsideTransformation";
+        private static volatile CenterInsideTransformation transformation;
 
         public static CenterInsideTransformation get() {
-            return new CenterInsideTransformation();
+            if (transformation == null) {
+                synchronized (CenterInsideTransformation.class) {
+                    if (transformation == null) {
+                        transformation = new CenterInsideTransformation();
+                    }
+                }
+            }
+            return transformation;
         }
 
         @Override
