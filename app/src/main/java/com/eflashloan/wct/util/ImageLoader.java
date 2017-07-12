@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.TransitionOptions;
 import com.bumptech.glide.load.Key;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
@@ -27,7 +26,6 @@ import java.security.MessageDigest;
 public final class ImageLoader {
     private static volatile ImageLoader loader;
     private final RequestOptions requestOptions;
-    private final TransitionOptions transitionOptions;
 
     private ImageLoader() {
         requestOptions = new RequestOptions()
