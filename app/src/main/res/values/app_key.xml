@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="bugly_key">11111</string>
-    <string name="jpush_key">9a7ddc97dde150b4fc06b81b</string>
 </resources>

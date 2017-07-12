@@ -12,4 +12,9 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
     public HomePresenter(HomeContract.View view) {
         super(view);
     }
+
+    @Override
+    public void start() {
+
+    }
 }
