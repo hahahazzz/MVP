@@ -16,7 +16,7 @@
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CoordinatorLayout
-            android:id="@+id/rl_menu"
+            android:id="@+id/cl_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"

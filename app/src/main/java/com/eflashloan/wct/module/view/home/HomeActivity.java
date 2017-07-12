@@ -3,7 +3,7 @@ package com.eflashloan.wct.module.view.home;
 import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,13 +15,13 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.eflashloan.wct.R;
 import com.eflashloan.wct.base.BaseActivity;
 import com.eflashloan.wct.base.BaseFragment;
+import com.eflashloan.wct.module.contract.HomeContract;
+import com.eflashloan.wct.module.presenter.HomePresenter;
 import com.eflashloan.wct.module.view.home.fragment.BuyCarFragment;
 import com.eflashloan.wct.module.view.home.fragment.CommunityFragment;
 import com.eflashloan.wct.module.view.home.fragment.FinanceFragment;
 import com.eflashloan.wct.module.view.home.fragment.PlayCarFragment;
 import com.eflashloan.wct.module.view.home.fragment.ShoppingGuideFragment;
-import com.eflashloan.wct.module.contract.HomeContract;
-import com.eflashloan.wct.module.presenter.HomePresenter;
 import com.eflashloan.wct.util.ActivityUtils;
 
 import java.util.HashMap;
@@ -35,12 +35,10 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
     BottomNavigationBar bnbHomeMenu;
     @BindView(R.id.drawer_home)
     DrawerLayout drawerLayout;
-    @BindView(R.id.rl_menu)
-    View rlMenu;
+    @BindView(R.id.cl_menu)
+    CoordinatorLayout clMenu;
     @BindView(R.id.cl_content)
-    View rlContent;
-    @BindView(R.id.app_bar_home)
-    AppBarLayout appbarHome;
+    CoordinatorLayout clContent;
 
     private final HashMap<Integer, BaseFragment> fragmentMap = new HashMap<>();
 
@@ -65,16 +63,16 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
 
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-                rlMenu.setPivotY(rlMenu.getHeight() / 2);
-                rlMenu.setPivotX(rlMenu.getWidth());
-                rlContent.setPivotY(rlContent.getHeight() / 2);
-                rlContent.setPivotX(0);
-                rlContent.layout(rlMenu.getRight(), 0, rlMenu.getRight() + rlContent.getWidth(), rlContent.getHeight());
+                clMenu.setPivotY(clMenu.getHeight() / 2);
+                clMenu.setPivotX(clMenu.getWidth());
+                clContent.setPivotY(clContent.getHeight() / 2);
+                clContent.setPivotX(0);
+                clContent.layout(clMenu.getRight(), 0, clMenu.getRight() + clContent.getWidth(), clContent.getHeight());
                 final float range = 1f - ANIM_RANGE;
-                rlContent.setScaleY(1 - slideOffset * range);
-                rlContent.setScaleX(1 - slideOffset * range);
-                rlMenu.setScaleY(ANIM_RANGE + range * slideOffset);
-                rlMenu.setScaleX(ANIM_RANGE + range * slideOffset);
+                clContent.setScaleY(1 - slideOffset * range);
+                clContent.setScaleX(1 - slideOffset * range);
+                clMenu.setScaleY(ANIM_RANGE + range * slideOffset);
+                clMenu.setScaleX(ANIM_RANGE + range * slideOffset);
             }
         });
         bnbHomeMenu
