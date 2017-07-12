@@ -119,6 +119,11 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Fra
     }
 
     @Override
+    public void close() {
+
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         presenter.resume();

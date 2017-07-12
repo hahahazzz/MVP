@@ -54,7 +54,7 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends App
         presenter = createPresenter();
         presenter = Preconditions.checkNotNull(presenter);
         act = this;
-        ActivityUtils.getActivityUtils().add(this);
+        ActivityUtils.get().add(this);
         start();
         presenter.start();
     }
@@ -154,7 +154,7 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends App
     @Override
     protected void onDestroy() {
         cancelLoadDialog(true);
-        ActivityUtils.getActivityUtils().remove(this);
+        ActivityUtils.get().remove(this);
         super.onDestroy();
     }
 }

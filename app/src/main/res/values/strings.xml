@@ -4,4 +4,10 @@
     <string name="text_hint_debug_save_url">保存空白字符表示使用默认Api地址\n<b>保存后重启App生效</b></string>
     <string name="toast_debug_url_save_success">保存成功</string>
     <string name="text_hint_target_url">请输入API主机地址</string>
+    <string name="tab_home_shopping_guide">导购</string>
+    <string name="tab_home_buy_car">买车</string>
+    <string name="tab_home_play_car">玩车堂</string>
+    <string name="tab_home_finance">金融</string>
+    <string name="tab_home_community">社区</string>
+    <string name="toast_home_click_again_to_exit">再点一次退出</string>
 </resources>

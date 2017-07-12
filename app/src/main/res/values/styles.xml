@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BaseAppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -26,7 +26,7 @@
 
     <style name="ToolbarStyle" parent="Base.Widget.AppCompat.Toolbar">
         <item name="titleTextColor">@android:color/white</item>
-        <item name="homeAsUpIndicator">@mipmap/ic_launcher</item>
+        <item name="homeAsUpIndicator">@drawable/ic_action_back_light</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme">

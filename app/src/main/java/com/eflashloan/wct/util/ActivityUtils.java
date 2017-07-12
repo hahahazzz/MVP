@@ -19,7 +19,7 @@ public final class ActivityUtils {
         activityStack = new Stack<>();
     }
 
-    public static ActivityUtils getActivityUtils() {
+    public static ActivityUtils get() {
         if (activityUtils == null) {
             synchronized (ActivityUtils.class) {
                 if (activityUtils == null) {

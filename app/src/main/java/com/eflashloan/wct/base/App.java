@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.StrictMode;
 
 import com.eflashloan.wct.util.DebugUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import static com.eflashloan.wct.base.CrashReportService.EXTRA_UNCAUGHT_EXCEPTION;
 
@@ -22,6 +23,10 @@ public class App extends Application {
         app = this;
         Thread.setDefaultUncaughtExceptionHandler(GlobalUncaughtExceptionHandler.getHandler());
         StrictMode.enableDefaults();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     public static App getApp() {
