@@ -6,7 +6,6 @@ android {
 
     productFlavors {
         dev {
-            applicationIdSuffix ".debug"
         }
     }
 
@@ -17,7 +16,7 @@ android {
         versionCode 10000
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "API_HOST", "\"https://www.baidu.com/\"");
+        buildConfigField("String", "API_HOST", "\"https://www.baidu.com/\"")
     }
     signingConfigs {
         def keystoreDir = "../signKey";
@@ -113,4 +112,7 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    compile 'cn.jiguang.sdk:jpush:3.0.7'
+    compile 'cn.jiguang.sdk:jcore:1.1.5'
 }
