@@ -10,12 +10,13 @@
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowSoftInputMode">stateAlwaysHidden|adjustPan</item>
-        <item name="android:configChanges">keyboardHidden|orientation</item>
-        <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
+        <item name="android:configChanges">keyboardHidden|orientation|screenSize</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnim</item>
         <item name="toolbarStyle">@style/ToolbarStyle</item>
     </style>
+
+    <style name="AppTheme" parent="BaseAppTheme"/>
 
     <style name="ActivityAnim">
         <item name="android:activityCloseEnterAnimation">@anim/anim_activity_close_enter</item>
@@ -26,11 +27,22 @@
 
     <style name="ToolbarStyle" parent="Base.Widget.AppCompat.Toolbar">
         <item name="titleTextColor">@android:color/white</item>
-        <item name="homeAsUpIndicator">@drawable/ic_action_back_light</item>
+        <item name="navigationIcon">@drawable/ic_action_back_light</item>
+        <item name="elevation">0dp</item>
+        <item name="popupTheme">@style/AppTheme.PopupOverlay</item>
     </style>
 
-    <style name="AppTheme" parent="BaseAppTheme">
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <!--Item的宽度-->
+        <item name="android:width">40dp</item>
+        <item name="actionDropDownStyle">@style/ActionDownStyle</item>
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="android:colorBackground">@color/colorPrimary</item>
+        <item name="overlapAnchor">false</item>
+    </style>
 
+    <style name="ActionDownStyle" parent="Base.Animation.AppCompat.DropDownUp">
+        <item name="android:width">@dimen/dp20</item>
     </style>
 
     <style name="LoadDialog" parent="Theme.AppCompat.Light.Dialog">
