@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".module.home.SplashActivity"
+            android:name=".module.view.home.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,10 +28,10 @@
             android:process=":remote"/>
 
         <activity
-            android:name=".module.debug.DebugActivity"
+            android:name=".module.view.debug.DebugActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".module.home.HomeActivity"
+            android:name=".module.view.home.HomeActivity"
             android:screenOrientation="portrait">
         </activity>
     </application>

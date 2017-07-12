@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
-    tools:context="com.eflashloan.wct.module.home.HomeActivity">
+    tools:context=".module.view.home.HomeActivity">
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_home"
