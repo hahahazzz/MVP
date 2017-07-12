@@ -7,8 +7,6 @@ import android.os.StrictMode;
 import com.eflashloan.wct.util.DebugUtils;
 import com.squareup.leakcanary.LeakCanary;
 
-import static com.eflashloan.wct.base.CrashReportService.EXTRA_UNCAUGHT_EXCEPTION;
-
 /**
  * @Author : QiuGang
  * @Email : 1607868475@qq.com
@@ -56,7 +54,7 @@ public class App extends Application {
             } else {
                 App app = getApp();
                 Intent intent = new Intent(app, CrashReportService.class);
-                intent.putExtra(EXTRA_UNCAUGHT_EXCEPTION, e);
+                intent.putExtra(CrashReportService.EXTRA_UNCAUGHT_EXCEPTION, e);
                 app.startActivity(intent);
             }
         }
