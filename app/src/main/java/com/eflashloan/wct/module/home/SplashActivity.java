@@ -3,6 +3,7 @@ package com.eflashloan.wct.module.home;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.eflashloan.wct.R;
 import com.eflashloan.wct.base.BaseActivity;
@@ -25,6 +26,7 @@ public class SplashActivity extends BaseActivity<SplashContract.Presenter> imple
 
     @Override
     protected void start() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @OnClick({R.id.text_splash_hello})

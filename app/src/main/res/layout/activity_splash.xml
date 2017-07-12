@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="saaaaaaaaaaaa"
+        android:text="很明显这是Splash页"
         android:textSize="@dimen/sp30"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
