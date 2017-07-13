@@ -1,5 +1,6 @@
 package com.eflashloan.wct.util;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -18,7 +19,7 @@ public final class ThreadPool {
         executor.execute(task);
     }
 
-    public static void shutdownNoew() {
-        executor.shutdownNow();
+    public static List<Runnable> shutdownNow() {
+        return executor.shutdownNow();
     }
 }

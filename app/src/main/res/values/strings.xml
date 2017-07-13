@@ -10,4 +10,5 @@
     <string name="tab_home_finance">金融</string>
     <string name="tab_home_community">社区</string>
     <string name="toast_home_click_again_to_exit">再点一次退出</string>
+    <string name="toast_message_push_alias_set_failed">别名设置失败</string>
 </resources>

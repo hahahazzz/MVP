@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.eflashloan.wct.BuildConfig;
 import com.eflashloan.wct.R;
 import com.eflashloan.wct.util.ActivityUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 
@@ -142,12 +143,14 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends App
     @Override
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onResume(this);
         presenter.resume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        MobclickAgent.onPause(this);
         presenter.pause();
     }
 

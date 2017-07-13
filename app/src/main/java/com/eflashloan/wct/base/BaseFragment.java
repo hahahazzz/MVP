@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.eflashloan.wct.BuildConfig;
 import com.eflashloan.wct.R;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 
@@ -126,12 +127,14 @@ public abstract class BaseFragment<P extends BaseContract.Presenter> extends Fra
     @Override
     public void onResume() {
         super.onResume();
+        MobclickAgent.onPageStart(getClass().getSimpleName());
         presenter.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        MobclickAgent.onPageEnd(getClass().getSimpleName());
         presenter.pause();
     }
 

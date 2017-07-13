@@ -4,8 +4,15 @@ import android.app.Application;
 import android.content.Intent;
 import android.os.StrictMode;
 
+import com.eflashloan.wct.BuildConfig;
+import com.eflashloan.wct.R;
 import com.eflashloan.wct.util.DebugUtils;
+import com.eflashloan.wct.util.ResourcesUtils;
 import com.squareup.leakcanary.LeakCanary;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.analytics.MobclickAgent;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * @Author : QiuGang
@@ -15,20 +22,41 @@ import com.squareup.leakcanary.LeakCanary;
 public class App extends Application {
     private static App app;
 
+    public static App getApp() {
+        return app;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         app = this;
         Thread.setDefaultUncaughtExceptionHandler(GlobalUncaughtExceptionHandler.getHandler());
         StrictMode.enableDefaults();
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
+        initUmeng();
+        initBugly();
+        initJPush();
+        if (!LeakCanary.isInAnalyzerProcess(this)) {
+            LeakCanary.install(this);
         }
-        LeakCanary.install(this);
     }
 
-    public static App getApp() {
-        return app;
+    private void initUmeng() {
+        MobclickAgent.setDebugMode(BuildConfig.DEBUG);
+        MobclickAgent.setCatchUncaughtExceptions(false);
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+    }
+
+    private void initJPush() {
+        JPushInterface.setDebugMode(BuildConfig.DEBUG);
+        JPushInterface.init(this);
+    }
+
+    private void initBugly() {
+        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(this);
+        strategy.setAppVersion(BuildConfig.VERSION_NAME)
+                .setAppPackageName(BuildConfig.APPLICATION_ID);
+        CrashReport.setIsDevelopmentDevice(this, BuildConfig.DEBUG);
+        CrashReport.initCrashReport(this, ResourcesUtils.getString(this, R.string.bugly_key), true, strategy);
     }
 
     static class GlobalUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {

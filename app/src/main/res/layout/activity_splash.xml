@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.eflashloan.wct.module.home.SplashActivity">
+    tools:context=".module.view.home.SplashActivity">
 
-    <TextView
+    <EditText
         android:id="@+id/text_splash_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

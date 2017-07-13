@@ -1,12 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
+    /*lintOptions{
+        abortOnError false
+    }*/
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     productFlavors {
         dev {
-            applicationIdSuffix ".debug"
+            applicationId "com.eflashloan.wct.debug"
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: applicationId,
+                    JPUSH_APPKEY : "101101b3ab6e434f4c657721",
+                    JPUSH_CHANNEL: "developer-default"
+            ]
+        }
+        rel {
+
         }
     }
 
@@ -17,7 +28,13 @@ android {
         versionCode 10000
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "API_HOST", "\"https://www.baidu.com/\"");
+        buildConfigField("String", "API_HOST", "\"https://www.baidu.com/\"")
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "9a7ddc97dde150b4fc06b81b",
+                JPUSH_CHANNEL: "developer-default"
+        ]
     }
     signingConfigs {
         def keystoreDir = "../signKey";
@@ -105,7 +122,6 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
     compile 'com.google.code.gson:gson:2.8.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
@@ -113,4 +129,8 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    compile 'cn.jiguang.sdk:jpush:3.0.7'
+    compile 'cn.jiguang.sdk:jcore:1.1.5'
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }

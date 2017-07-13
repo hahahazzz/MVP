@@ -96,7 +96,7 @@ public final class ActivityUtils {
             AppCompatActivity removeActivity = activityStack.remove(0);
             removeActivity.finish();
         }
-        ThreadPool.shutdownNoew();
+        ThreadPool.shutdownNow();
         Process.killProcess(Process.myPid());
         System.exit(0);
     }
