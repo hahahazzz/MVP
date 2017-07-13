@@ -23,12 +23,10 @@ import com.eflashloan.wct.module.view.home.fragment.FinanceFragment;
 import com.eflashloan.wct.module.view.home.fragment.PlayCarFragment;
 import com.eflashloan.wct.module.view.home.fragment.ShoppingGuideFragment;
 import com.eflashloan.wct.util.ActivityUtils;
-import com.eflashloan.wct.util.LogUtils;
 
 import java.util.HashMap;
 
 import butterknife.BindView;
-import cn.jpush.android.api.JPushInterface;
 
 public class HomeActivity extends BaseActivity<HomeContract.Presenter> implements HomeContract.View {
     @BindView(R.id.toolbar_home)
@@ -101,7 +99,6 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
                 })
                 .setFirstSelectedPosition(0)
                 .initialise();
-        LogUtils.d(JPushInterface.getRegistrationID(this));
     }
 
     private void switchFragment(int position) {

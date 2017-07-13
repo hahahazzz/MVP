@@ -2,6 +2,8 @@ package com.eflashloan.wct.module.presenter;
 
 import com.eflashloan.wct.base.BasePresenter;
 import com.eflashloan.wct.module.contract.HomeContract;
+import com.eflashloan.wct.util.LogUtils;
+import com.eflashloan.wct.util.push.PushManager;
 
 /**
  * @Author : QiuGang
@@ -15,6 +17,7 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void start() {
-
+        PushManager.getManager().setAlias("wct_dev");
+        LogUtils.d(PushManager.getManager().getRegistrationId());
     }
 }
