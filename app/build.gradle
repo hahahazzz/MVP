@@ -16,6 +16,9 @@ android {
                     JPUSH_CHANNEL: "developer-default"
             ]
         }
+        rel {
+
+        }
     }
 
     defaultConfig {
