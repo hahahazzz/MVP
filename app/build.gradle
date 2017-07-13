@@ -132,4 +132,5 @@ dependencies {
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile 'cn.jiguang.sdk:jpush:3.0.7'
     compile 'cn.jiguang.sdk:jcore:1.1.5'
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }

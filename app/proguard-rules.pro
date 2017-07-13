@@ -147,6 +147,7 @@
 -keep class * implements com.google.gson.JsonDeserializer
 
 ##---------------End: proguard configuration for Gson  ----------
+
 #----------------------------leakcanary Begin-----------------------------
 -dontwarn com.squareup.haha.guava.**
 -dontwarn com.squareup.haha.perflib.**
@@ -158,3 +159,9 @@
 # Marshmallow removed Notification.setLatestEventInfo()
 -dontwarn android.app.Notification
 #----------------------------leakcanary End-----------------------------
+
+#----------------------------Umeng Begin-----------------------------
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+#----------------------------Umeng Begin-----------------------------

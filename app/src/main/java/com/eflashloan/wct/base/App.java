@@ -10,6 +10,7 @@ import com.eflashloan.wct.util.DebugUtils;
 import com.eflashloan.wct.util.ResourcesUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.analytics.MobclickAgent;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -27,11 +28,18 @@ public class App extends Application {
         app = this;
         Thread.setDefaultUncaughtExceptionHandler(GlobalUncaughtExceptionHandler.getHandler());
         StrictMode.enableDefaults();
+        initUment();
         initBugly();
         initJPush();
         if (!LeakCanary.isInAnalyzerProcess(this)) {
             LeakCanary.install(this);
         }
+    }
+
+    private void initUment() {
+        MobclickAgent.setDebugMode(BuildConfig.DEBUG);
+        MobclickAgent.setCatchUncaughtExceptions(false);
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
     }
 
     private void initJPush() {

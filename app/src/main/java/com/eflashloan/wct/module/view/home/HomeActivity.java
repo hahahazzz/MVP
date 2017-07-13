@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -147,7 +146,6 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        drawerLayout.openDrawer(Gravity.LEFT);
         return super.onOptionsItemSelected(item);
     }
 
