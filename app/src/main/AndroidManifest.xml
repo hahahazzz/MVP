@@ -3,10 +3,10 @@
           package="com.eflashloan.wct">
 
     <permission
-        android:name="com.eflashloan.wct.permission.JPUSH_MESSAGE"
+        android:name="${JPUSH_PKGNAME}.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"/>
 
-    <uses-permission android:name="com.eflashloan.wct.permission.JPUSH_MESSAGE"/>
+    <uses-permission android:name="${JPUSH_PKGNAME}.permission.JPUSH_MESSAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -51,6 +51,7 @@
             android:enabled="true"
             android:exported="false"
             android:process=":remote"/>
+
         <activity
             android:name=".module.view.debug.DebugActivity"
             android:screenOrientation="portrait"/>

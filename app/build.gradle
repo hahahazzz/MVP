@@ -6,6 +6,12 @@ android {
 
     productFlavors {
         dev {
+            applicationId "com.eflashloan.wct.debug"
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: applicationId,
+                    JPUSH_APPKEY : "101101b3ab6e434f4c657721",
+                    JPUSH_CHANNEL: "developer-default"
+            ]
         }
     }
 
