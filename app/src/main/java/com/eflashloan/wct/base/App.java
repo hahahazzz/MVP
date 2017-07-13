@@ -22,13 +22,17 @@ import cn.jpush.android.api.JPushInterface;
 public class App extends Application {
     private static App app;
 
+    public static App getApp() {
+        return app;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         app = this;
         Thread.setDefaultUncaughtExceptionHandler(GlobalUncaughtExceptionHandler.getHandler());
         StrictMode.enableDefaults();
-        initUment();
+        initUmeng();
         initBugly();
         initJPush();
         if (!LeakCanary.isInAnalyzerProcess(this)) {
@@ -36,7 +40,7 @@ public class App extends Application {
         }
     }
 
-    private void initUment() {
+    private void initUmeng() {
         MobclickAgent.setDebugMode(BuildConfig.DEBUG);
         MobclickAgent.setCatchUncaughtExceptions(false);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
@@ -53,10 +57,6 @@ public class App extends Application {
                 .setAppPackageName(BuildConfig.APPLICATION_ID);
         CrashReport.setIsDevelopmentDevice(this, BuildConfig.DEBUG);
         CrashReport.initCrashReport(this, ResourcesUtils.getString(this, R.string.bugly_key), true, strategy);
-    }
-
-    public static App getApp() {
-        return app;
     }
 
     static class GlobalUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
