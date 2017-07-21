@@ -83,7 +83,7 @@ public class App extends Application {
                 App app = getApp();
                 Intent intent = new Intent(app, CrashReportService.class);
                 intent.putExtra(CrashReportService.EXTRA_UNCAUGHT_EXCEPTION, e);
-                app.startActivity(intent);
+                app.startService(intent);
             }
         }
     }
