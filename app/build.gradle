@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 def appName = "mvp"
+
 android {
     /*lintOptions{
         abortOnError false
@@ -8,11 +9,8 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     productFlavors {
-        dev {
-        }
-        rel {
-
-        }
+        dev {}
+        rel {}
     }
 
     defaultConfig {
