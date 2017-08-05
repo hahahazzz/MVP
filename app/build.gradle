@@ -9,12 +9,6 @@ android {
 
     productFlavors {
         dev {
-            applicationId "com.eflashloan.wct.debug"
-            manifestPlaceholders = [
-                    JPUSH_PKGNAME: applicationId,
-                    JPUSH_APPKEY : "101101b3ab6e434f4c657721",
-                    JPUSH_CHANNEL: "developer-default"
-            ]
         }
         rel {
 
@@ -22,7 +16,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.eflashloan.wct"
+        applicationId "com.dmh.mvp"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 10000
@@ -36,31 +30,31 @@ android {
                 JPUSH_CHANNEL: "developer-default"
         ]
     }
-    signingConfigs {
+    /*signingConfigs {
         def keystoreDir = "../signKey";
         config {
-            /*File propFile = file(keystoreDir + "/eflashloan.properties")
+            File propFile = file(keystoreDir + "/dmh.properties")
             def Properties prop = new Properties();
             prop.load(new FileInputStream(propFile));
-            storeFile = file(keystoreDir + "/eflashloan.jks")
+            storeFile = file(keystoreDir + "/dmh.jks")
             keyAlias = prop['keyAlias']
             keyPassword = prop['keyPassword']
-            storePassword = prop['storePassword']*/
+            storePassword = prop['storePassword']
         }
-    }
+    }*/
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
             zipAlignEnabled true
-            signingConfig null
-            signingConfig signingConfigs.config
+            //signingConfig null
+            //signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
-            signingConfig null
-            signingConfig signingConfigs.config
+            //signingConfig null
+            //signingConfig signingConfigs.config
         }
     }
 
@@ -117,6 +111,8 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'com.google.dagger:dagger:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.1'
     compile 'com.orhanobut:logger:2.1.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -124,8 +120,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
