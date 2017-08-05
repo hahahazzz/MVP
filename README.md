@@ -1,4 +1,4 @@
-# 一个MVP+Dagger2+Retrofit的模板
+# 一个MVP模板
 
 ### 项目内包含
 
