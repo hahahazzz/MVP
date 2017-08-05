@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+def appName = "mvp"
 android {
     /*lintOptions{
         abortOnError false
@@ -79,9 +79,9 @@ android {
                                 }
                             }
                             def time = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-                            fileName = "wct-${prod.name}-${defaultConfig.versionName}-${time}-release.apk"
+                            fileName = "${appName}-${prod.name}-${defaultConfig.versionName}-${time}-release.apk"
                         } else {
-                            fileName = "wct-${prod.name}-${defaultConfig.versionName}-debug.apk"
+                            fileName = "${appName}-${prod.name}-${defaultConfig.versionName}-debug.apk"
                         }
                         output.outputFile = new File(outputDirectory, fileName)
                     }
