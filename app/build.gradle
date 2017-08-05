@@ -39,13 +39,13 @@ android {
     signingConfigs {
         def keystoreDir = "../signKey";
         config {
-            File propFile = file(keystoreDir + "/eflashloan.properties")
+            /*File propFile = file(keystoreDir + "/eflashloan.properties")
             def Properties prop = new Properties();
             prop.load(new FileInputStream(propFile));
             storeFile = file(keystoreDir + "/eflashloan.jks")
             keyAlias = prop['keyAlias']
             keyPassword = prop['keyPassword']
-            storePassword = prop['storePassword']
+            storePassword = prop['storePassword']*/
         }
     }
     buildTypes {
