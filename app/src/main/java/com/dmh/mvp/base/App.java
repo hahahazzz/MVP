@@ -6,6 +6,8 @@ import android.os.StrictMode;
 
 import com.dmh.mvp.BuildConfig;
 import com.dmh.mvp.R;
+import com.dmh.mvp.di.component.ApiComponent;
+import com.dmh.mvp.di.component.DaggerApiComponent;
 import com.dmh.mvp.util.DebugUtils;
 import com.dmh.mvp.util.ResourcesUtils;
 import com.squareup.leakcanary.LeakCanary;
@@ -21,6 +23,7 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class App extends Application {
     private static App app;
+    private ApiComponent apiComponent;
 
     public static App getApp() {
         return app;
@@ -30,6 +33,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
+        apiComponent = DaggerApiComponent.builder().build();
         Thread.setDefaultUncaughtExceptionHandler(GlobalUncaughtExceptionHandler.getHandler());
         StrictMode.enableDefaults();
         initUmeng();
@@ -38,6 +42,10 @@ public class App extends Application {
         if (!LeakCanary.isInAnalyzerProcess(this)) {
             LeakCanary.install(this);
         }
+    }
+
+    public ApiComponent getApiComponent() {
+        return apiComponent;
     }
 
     private void initUmeng() {

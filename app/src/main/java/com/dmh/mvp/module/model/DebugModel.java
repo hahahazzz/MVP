@@ -11,6 +11,7 @@ import javax.inject.Inject;
  * @Date : 2017/7/7 10:16
  */
 public class DebugModel implements DebugContract.Model {
+
     @Inject
     public DebugModel() {
     }

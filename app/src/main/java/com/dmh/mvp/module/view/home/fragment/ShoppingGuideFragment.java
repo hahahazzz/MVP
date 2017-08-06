@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import com.dmh.mvp.R;
 import com.dmh.mvp.base.BaseContract;
 import com.dmh.mvp.base.BaseFragment;
-import com.dmh.mvp.di.component.DaggerMainComponent;
+import com.dmh.mvp.di.component.MainComponent;
 import com.dmh.mvp.module.contract.ShoppingGuideContract;
 
 import javax.inject.Inject;
@@ -26,8 +26,8 @@ public class ShoppingGuideFragment extends BaseFragment implements ShoppingGuide
 
     @NonNull
     @Override
-    protected BaseContract.Presenter injectPresenter() {
-        DaggerMainComponent.builder().build().inject(this);
+    protected BaseContract.Presenter injectPresenter(MainComponent component) {
+        component.inject(this);
         return presenter;
     }
 }

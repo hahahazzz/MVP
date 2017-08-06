@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import com.dmh.mvp.R;
 import com.dmh.mvp.base.BaseActivity;
 import com.dmh.mvp.base.BaseContract;
-import com.dmh.mvp.di.component.DaggerMainComponent;
+import com.dmh.mvp.di.component.MainComponent;
 import com.dmh.mvp.module.contract.SplashContract;
 
 import javax.inject.Inject;
@@ -26,8 +26,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @NonNull
     @Override
-    protected BaseContract.Presenter injectPresenter() {
-        DaggerMainComponent.builder().build().inject(this);
+    protected BaseContract.Presenter injectPresenter(MainComponent component) {
+        component.inject(this);
         return presenter;
     }
 

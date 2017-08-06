@@ -16,7 +16,7 @@ import com.dmh.mvp.R;
 import com.dmh.mvp.base.BaseActivity;
 import com.dmh.mvp.base.BaseContract;
 import com.dmh.mvp.base.BaseFragment;
-import com.dmh.mvp.di.component.DaggerMainComponent;
+import com.dmh.mvp.di.component.MainComponent;
 import com.dmh.mvp.module.contract.HomeContract;
 import com.dmh.mvp.module.view.home.fragment.BuyCarFragment;
 import com.dmh.mvp.module.view.home.fragment.CommunityFragment;
@@ -55,8 +55,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     @NonNull
     @Override
-    protected BaseContract.Presenter injectPresenter() {
-        DaggerMainComponent.builder().build().inject(this);
+    protected BaseContract.Presenter injectPresenter(MainComponent component) {
+        component.inject(this);
         return presenter;
     }
 

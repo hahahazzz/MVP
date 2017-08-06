@@ -11,7 +11,7 @@ import android.widget.RadioButton;
 import com.dmh.mvp.R;
 import com.dmh.mvp.base.BaseActivity;
 import com.dmh.mvp.base.BaseContract;
-import com.dmh.mvp.di.component.DaggerMainComponent;
+import com.dmh.mvp.di.component.MainComponent;
 import com.dmh.mvp.module.contract.DebugContract;
 import com.dmh.mvp.util.ResourcesUtils;
 
@@ -39,8 +39,8 @@ public class DebugActivity extends BaseActivity implements DebugContract.View {
 
     @NonNull
     @Override
-    protected BaseContract.Presenter injectPresenter() {
-        DaggerMainComponent.builder().build().inject(this);
+    protected BaseContract.Presenter injectPresenter(MainComponent component) {
+        component.inject(this);
         return presenter;
     }
 

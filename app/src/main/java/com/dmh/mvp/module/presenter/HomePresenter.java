@@ -2,8 +2,6 @@ package com.dmh.mvp.module.presenter;
 
 import com.dmh.mvp.base.BasePresenter;
 import com.dmh.mvp.module.contract.HomeContract;
-import com.dmh.mvp.util.LogUtils;
-import com.dmh.mvp.util.push.PushManager;
 
 import javax.inject.Inject;
 
@@ -14,11 +12,12 @@ import javax.inject.Inject;
  */
 public class HomePresenter extends BasePresenter<HomeContract.View> implements HomeContract.Presenter {
     @Inject
+    HomeContract.Model model;
+
+    @Inject
     public HomePresenter() {}
 
     @Override
     public void start() {
-        PushManager.getManager().setAlias("wct_dev");
-        LogUtils.d(PushManager.getManager().getRegistrationId());
     }
 }

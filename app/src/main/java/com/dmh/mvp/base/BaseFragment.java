@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.dmh.mvp.BuildConfig;
 import com.dmh.mvp.R;
+import com.dmh.mvp.di.component.DaggerMainComponent;
+import com.dmh.mvp.di.component.MainComponent;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
@@ -59,7 +61,8 @@ public abstract class BaseFragment extends Fragment implements BaseContract.View
         if (contentView == null) {
             contentView = inflater.inflate(getLayoutResId(), container, false);
             ButterKnife.bind(this, contentView);
-            basePresenter = Preconditions.checkNotNull(injectPresenter());
+            basePresenter = Preconditions.checkNotNull(injectPresenter(DaggerMainComponent.builder().apiComponent
+                    (App.getApp().getApiComponent()).build()));
             basePresenter.attachView(this);
             start();
             basePresenter.start();
@@ -71,7 +74,7 @@ public abstract class BaseFragment extends Fragment implements BaseContract.View
     protected abstract int getLayoutResId();
 
     @NonNull
-    protected abstract BaseContract.Presenter injectPresenter();
+    protected abstract BaseContract.Presenter injectPresenter(MainComponent component);
 
     protected void start() {}
 

@@ -14,4 +14,7 @@ public interface HomeContract {
 
     interface Presenter extends BaseContract.Presenter {
     }
+
+    interface Model extends BaseContract.Model {
+    }
 }

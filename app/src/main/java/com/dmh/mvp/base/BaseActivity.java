@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.dmh.mvp.BuildConfig;
 import com.dmh.mvp.R;
+import com.dmh.mvp.di.component.DaggerMainComponent;
+import com.dmh.mvp.di.component.MainComponent;
 import com.dmh.mvp.util.ActivityUtils;
 import com.umeng.analytics.MobclickAgent;
 
@@ -50,19 +52,20 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseCont
         ButterKnife.bind(this);
         activity = this;
         ActivityUtils.get().add(this);
-        basePresenter = Preconditions.checkNotNull(injectPresenter());
+        basePresenter = Preconditions.checkNotNull(injectPresenter(DaggerMainComponent.builder().apiComponent
+                (App.getApp().getApiComponent()).build()));
         basePresenter.attachView(this);
         start();
         basePresenter.start();
     }
 
-    protected void start() {}
-
     @LayoutRes
     protected abstract int getLayoutResId();
 
     @NonNull
-    protected abstract BaseContract.Presenter injectPresenter();
+    protected abstract BaseContract.Presenter injectPresenter(MainComponent component);
+
+    protected void start() {}
 
     protected void setSupportToolbar(Toolbar toolbar) {
         setSupportActionBar(toolbar);

@@ -1,7 +1,7 @@
 package com.dmh.mvp.di.component;
 
-import com.dmh.mvp.di.module.ModelModule;
-import com.dmh.mvp.di.module.PresenterModule;
+import com.dmh.mvp.di.module.ModelMappingModule;
+import com.dmh.mvp.di.module.PresenterMappingModule;
 import com.dmh.mvp.di.scope.PerActivity;
 import com.dmh.mvp.di.scope.PerFragment;
 import com.dmh.mvp.di.scope.PerPresenter;
@@ -22,7 +22,7 @@ import dagger.Component;
 @PerActivity
 @PerFragment
 @PerPresenter
-@Component(modules = {PresenterModule.class, ModelModule.class})
+@Component(modules = {PresenterMappingModule.class, ModelMappingModule.class}, dependencies = {ApiComponent.class})
 public interface MainComponent {
     void inject(SplashActivity activity);
 

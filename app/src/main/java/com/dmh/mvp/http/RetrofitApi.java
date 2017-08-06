@@ -1,19 +1,15 @@
 package com.dmh.mvp.http;
 
 import com.dmh.mvp.BuildConfig;
-import com.dmh.mvp.Constants;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @Author : QiuGang
@@ -21,42 +17,37 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @Date : 2017/7/6 14:57
  */
 public class RetrofitApi implements Api {
-    private static Api api;
-    private final ApiService apiService;
-    private OkHttpClient requestClient;
+    @Inject
+    ApiService apiService;
 
-    private RetrofitApi() {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(30L, TimeUnit.SECONDS);
-        builder.readTimeout(30L, TimeUnit.SECONDS);
-        builder.writeTimeout(30L, TimeUnit.SECONDS);
-        if (BuildConfig.DEBUG) {
-            builder.addInterceptor(new LogInterceptor());
-        }
-        requestClient = builder.build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .client(requestClient)
-                .baseUrl(Constants.API_HOST)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        apiService = retrofit.create(ApiService.class);
+    @Inject
+    public RetrofitApi() {
     }
 
-    public static Api getApi() {
-        if (api == null) {
-            synchronized (RetrofitApi.class) {
-                if (api == null) {
-                    api = new RetrofitApi();
-                }
-            }
-        }
-        return api;
+    public static Interceptor getInterceptor() {
+        return LogInterceptor.getInstance();
     }
 
     static class LogInterceptor implements Interceptor {
-        private final static String LINE_SEPARATOR = System.lineSeparator();
+        private final static String LINE_SEPARATOR = "\n";
         private final static String TAB = "\t";
+        private static volatile LogInterceptor interceptor;
+
+        private LogInterceptor() {}
+
+        public static LogInterceptor getInstance() {
+            if (!BuildConfig.DEBUG) {
+                return null;
+            }
+            if (interceptor == null) {
+                synchronized (LogInterceptor.class) {
+                    if (interceptor == null) {
+                        interceptor = new LogInterceptor();
+                    }
+                }
+            }
+            return interceptor;
+        }
 
         @Override
         public Response intercept(Chain chain) throws IOException {

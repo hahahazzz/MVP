@@ -27,7 +27,7 @@ import dagger.Module;
  * Email : 1607868475@qq.com
  */
 @Module
-public abstract class PresenterModule {
+public abstract class PresenterMappingModule {
     @PerActivity
     @Binds
     public abstract SplashContract.Presenter provideSplashPresenter(SplashPresenter presenter);
