@@ -6,4 +6,5 @@ package com.dmh.mvp.http;
  * @Date : 2017/7/6 14:57
  */
 public interface Api {
+    String API_HOST = "http://www.sanbiaoge.cn/";
 }

@@ -10,18 +10,18 @@ import java.util.ArrayList;
  * @Email : 1607868475@qq.com
  * @Date : 2017/7/6 14:56
  */
-public final class JsonParser {
-    private static JsonParser parser;
+public final class JsonUtils {
+    private static JsonUtils parser;
     private final Gson gson;
 
-    private JsonParser() {
+    private JsonUtils() {
         gson = new Gson();
     }
 
-    public static JsonParser getParser() {
+    public static JsonUtils getParser() {
         if (parser == null) {
-            synchronized (JsonParser.class) {
-                parser = new JsonParser();
+            synchronized (JsonUtils.class) {
+                parser = new JsonUtils();
             }
         }
         return parser;

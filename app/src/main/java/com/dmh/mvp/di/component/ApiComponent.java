@@ -1,7 +1,6 @@
 package com.dmh.mvp.di.component;
 
 import com.dmh.mvp.di.module.ApiMappingModule;
-import com.dmh.mvp.di.module.ApiModule;
 import com.dmh.mvp.http.Api;
 
 import javax.inject.Singleton;
@@ -13,7 +12,7 @@ import dagger.Component;
  * Email : 1607868475@qq.com
  */
 @Singleton
-@Component(modules = {ApiModule.class, ApiMappingModule.class})
+@Component(modules = {ApiMappingModule.class})
 public interface ApiComponent {
     Api getApi();
 }
