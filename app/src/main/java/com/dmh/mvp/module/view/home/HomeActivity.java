@@ -18,10 +18,6 @@ import com.dmh.mvp.base.BaseContract;
 import com.dmh.mvp.base.BaseFragment;
 import com.dmh.mvp.di.component.MainComponent;
 import com.dmh.mvp.module.contract.HomeContract;
-import com.dmh.mvp.module.view.home.fragment.BuyCarFragment;
-import com.dmh.mvp.module.view.home.fragment.CommunityFragment;
-import com.dmh.mvp.module.view.home.fragment.FinanceFragment;
-import com.dmh.mvp.module.view.home.fragment.PlayCarFragment;
 import com.dmh.mvp.module.view.home.fragment.ShoppingGuideFragment;
 import com.dmh.mvp.util.ActivityUtils;
 
@@ -119,21 +115,17 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         BaseFragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new ShoppingGuideFragment();
                 break;
             case 1:
-                fragment = new BuyCarFragment();
                 break;
             case 2:
-                fragment = new PlayCarFragment();
                 break;
             case 3:
-                fragment = new FinanceFragment();
                 break;
             case 4:
-                fragment = new CommunityFragment();
                 break;
         }
+        fragment = new ShoppingGuideFragment();
         fragmentMap.put(position, fragment);
         switchFragment(fragment);
     }

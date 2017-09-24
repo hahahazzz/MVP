@@ -1,7 +1,7 @@
 package com.dmh.mvp.di.module;
 
 import com.dmh.mvp.http.Api;
-import com.dmh.mvp.http.RetrofitApi;
+import com.dmh.mvp.http.OkHttpApi;
 
 import javax.inject.Singleton;
 
@@ -16,5 +16,5 @@ import dagger.Module;
 public abstract class ApiMappingModule {
     @Singleton
     @Binds
-    public abstract Api provideApi(RetrofitApi retrofitApi);
+    public abstract Api provideApi(OkHttpApi okHttpApi);
 }

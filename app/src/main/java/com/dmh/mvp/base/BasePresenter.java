@@ -2,15 +2,6 @@ package com.dmh.mvp.base;
 
 import com.dmh.mvp.util.DebugUtils;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
-
 /**
  * @Author : QiuGang
  * @Email : 1607868475@qq.com
@@ -18,7 +9,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter {
     protected V view;
-    private CompositeDisposable disposableContainer = new CompositeDisposable();
 
     @Override
     public void attachView(BaseContract.View view) {
@@ -46,26 +36,5 @@ public class BasePresenter<V extends BaseContract.View> implements BaseContract.
 
     @Override
     public void destroy() {
-        disposableContainer.clear();
-    }
-
-    protected <T> void addDisposable(Observable<T> observable, Observer<T> observer, boolean autoSchedule) {
-        if (autoSchedule) {
-            observable
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
-        }
-        observable
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(@NonNull Disposable disposable) throws Exception {
-                        disposableContainer.add(disposable);
-                    }
-                })
-                .subscribe(observer);
-    }
-
-    protected <T> void addDisposable(Observable<T> observable, Observer<T> observer) {
-        addDisposable(observable, observer, true);
     }
 }

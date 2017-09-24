@@ -2,20 +2,12 @@ package com.dmh.mvp.di.module;
 
 import com.dmh.mvp.di.scope.PerActivity;
 import com.dmh.mvp.di.scope.PerFragment;
-import com.dmh.mvp.module.contract.BuyCarContract;
-import com.dmh.mvp.module.contract.CommunityContract;
 import com.dmh.mvp.module.contract.DebugContract;
-import com.dmh.mvp.module.contract.FinanceContract;
 import com.dmh.mvp.module.contract.HomeContract;
-import com.dmh.mvp.module.contract.PlayCarContract;
 import com.dmh.mvp.module.contract.ShoppingGuideContract;
 import com.dmh.mvp.module.contract.SplashContract;
-import com.dmh.mvp.module.presenter.BuyCarPresenter;
-import com.dmh.mvp.module.presenter.CommunityPresenter;
 import com.dmh.mvp.module.presenter.DebugPresenter;
-import com.dmh.mvp.module.presenter.FinancePresenter;
 import com.dmh.mvp.module.presenter.HomePresenter;
-import com.dmh.mvp.module.presenter.PlayCarPresenter;
 import com.dmh.mvp.module.presenter.ShoppingPresenter;
 import com.dmh.mvp.module.presenter.SplashPresenter;
 
@@ -39,22 +31,6 @@ public abstract class PresenterMappingModule {
     @PerActivity
     @Binds
     public abstract DebugContract.Presenter provideDebugPresenter(DebugPresenter presenter);
-
-    @PerFragment
-    @Binds
-    public abstract BuyCarContract.Presenter provideBuyCarPresenter(BuyCarPresenter presenter);
-
-    @PerFragment
-    @Binds
-    public abstract CommunityContract.Presenter provideCommunityPresenter(CommunityPresenter presenter);
-
-    @PerFragment
-    @Binds
-    public abstract FinanceContract.Presenter provideFinancePresenter(FinancePresenter presenter);
-
-    @PerFragment
-    @Binds
-    public abstract PlayCarContract.Presenter providePlayCarPresenter(PlayCarPresenter presenter);
 
     @PerFragment
     @Binds

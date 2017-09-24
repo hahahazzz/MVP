@@ -16,12 +16,9 @@ import okhttp3.ResponseBody;
  * @Email : 1607868475@qq.com
  * @Date : 2017/7/6 14:57
  */
-public class RetrofitApi implements Api {
+public class OkHttpApi implements Api {
     @Inject
-    ApiService apiService;
-
-    @Inject
-    public RetrofitApi() {
+    public OkHttpApi() {
     }
 
     public static Interceptor getInterceptor() {
