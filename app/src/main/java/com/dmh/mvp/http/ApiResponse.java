@@ -1,6 +1,6 @@
 package com.dmh.mvp.http;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
 /**
  * Created by QiuGang on 2017/9/24 22:23
@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
  */
 public class ApiResponse {
     private int code;
-    private JsonObject data;
+    private JsonElement data;
     private String msg;
 
     public int getCode() {
@@ -19,11 +19,11 @@ public class ApiResponse {
         this.code = code;
     }
 
-    public JsonObject getData() {
+    public JsonElement getData() {
         return data;
     }
 
-    public void setData(JsonObject data) {
+    public void setData(JsonElement data) {
         this.data = data;
     }
 
