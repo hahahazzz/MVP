@@ -4,17 +4,11 @@
 
 - [JakeWharton/butterknife](https://github.com/JakeWharton/butterknife)
 
-- [square/retrofit](https://github.com/square/retrofit)
-
 - [google/dagger](https://github.com/google/dagger)
 
 - [Ashok-Varma/BottomNavigation](https://github.com/Ashok-Varma/BottomNavigation)
 
 - [orhanobut/logger](https://github.com/orhanobut/logger)
-
-- [ReactiveX/RxJava](https://github.com/ReactiveX/RxJava)
-
-- [ReactiveX/RxAndroid](https://github.com/ReactiveX/RxAndroid)
 
 - [google/gson](https://github.com/google/gson)
 
