@@ -7,6 +7,8 @@ import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
 
+import com.tencent.bugly.crashreport.CrashReport;
+
 import java.io.Serializable;
 
 public class CrashReportService extends Service {
@@ -47,8 +49,7 @@ public class CrashReportService extends Service {
                     if (needReport()) {
                         lastReportTimestamp = getCurrentTimestamp();
                         Throwable throwable = (Throwable) serializableExtra;
-                        // TODO: 2017/7/6
-                        //CrashReport.postCatchedException(throwable);
+                        CrashReport.postCatchedException(throwable);
                     }
                 }
             }

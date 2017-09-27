@@ -11,6 +11,11 @@ import com.dmh.mvp.base.App;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.SynchronousQueue;
@@ -18,7 +23,12 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
 import okhttp3.Dispatcher;
@@ -34,6 +44,8 @@ import okhttp3.ResponseBody;
  * @Date : 2017/7/6 14:57
  */
 public class OkHttpApi implements Api {
+    private static volatile Api api;
+
     private static final boolean DEBUG_MODE = BuildConfig.DEBUG;
     public final String TAG_CANCEL_ALL_REQUEST = "cancelAllRequest";
 
@@ -44,13 +56,24 @@ public class OkHttpApi implements Api {
     private final Executor executor;
     private final Gson jsonParse;
 
-    @Inject
+    public static Api getApi() {
+        if (api == null) {
+            synchronized (OkHttpApi.class) {
+                if (api == null) {
+                    api = new OkHttpApi();
+                }
+            }
+        }
+        return api;
+    }
+
     public OkHttpApi() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .writeTimeout(TIME_OUT, TimeUnit.SECONDS);
         if (DEBUG_MODE) {
+            trustAllHttps(builder);
             builder.addInterceptor(LogInterceptor.getInstance());
         }
         requestClient = builder.build();
@@ -215,6 +238,42 @@ public class OkHttpApi implements Api {
                 }
             }
         });
+    }
+
+    private void trustAllHttps(OkHttpClient.Builder builder) {
+        X509TrustManager trustManager = new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        };
+        try {
+            SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, new TrustManager[]{trustManager}, new SecureRandom());
+            SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+            builder
+                    .sslSocketFactory(sslSocketFactory, trustManager)
+                    .hostnameVerifier(new HostnameVerifier() {
+                        @Override
+                        public boolean verify(String hostname, SSLSession session) {
+                            return true;
+                        }
+                    });
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
     }
 
     private static ConnectivityManager cm = null;

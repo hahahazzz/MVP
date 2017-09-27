@@ -9,10 +9,16 @@ import com.dmh.mvp.util.DebugUtils;
  */
 public class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter {
     protected V view;
+    private BaseContract.Model baseModel;
 
     @Override
-    public void attachView(BaseContract.View view) {
+    public void attachViewAndLinkModel(BaseContract.View view) {
         this.view = (V) view;
+        baseModel = linkModel();
+    }
+
+    protected BaseContract.Model linkModel() {
+        return null;
     }
 
     @Override
@@ -36,5 +42,8 @@ public class BasePresenter<V extends BaseContract.View> implements BaseContract.
 
     @Override
     public void destroy() {
+        if (baseModel != null) {
+            baseModel.destroy();
+        }
     }
 }

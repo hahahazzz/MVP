@@ -3,6 +3,7 @@ package com.dmh.mvp.module.presenter;
 import android.text.TextUtils;
 
 import com.dmh.mvp.Constants;
+import com.dmh.mvp.base.BaseContract;
 import com.dmh.mvp.base.BasePresenter;
 import com.dmh.mvp.module.contract.DebugContract;
 import com.dmh.mvp.util.DebugUtils;
@@ -20,8 +21,11 @@ public class DebugPresenter extends BasePresenter<DebugContract.View> implements
     DebugContract.Model model;
 
     @Inject
-    public DebugPresenter() {
+    public DebugPresenter() { }
 
+    @Override
+    protected BaseContract.Model linkModel() {
+        return model;
     }
 
     @Override

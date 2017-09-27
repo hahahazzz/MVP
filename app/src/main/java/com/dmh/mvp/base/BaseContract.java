@@ -21,7 +21,7 @@ public interface BaseContract {
     }
 
     interface Presenter<V extends BaseContract.View> {
-        void attachView(V view);
+        void attachViewAndLinkModel(V view);
 
         void start();
 
@@ -33,6 +33,6 @@ public interface BaseContract {
     }
 
     interface Model {
-
+        void destroy();
     }
 }

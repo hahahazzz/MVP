@@ -18,7 +18,7 @@ import dagger.Component;
 @PerActivity
 @PerFragment
 @PerPresenter
-@Component(modules = {PresenterMappingModule.class, ModelMappingModule.class}, dependencies = {ApiComponent.class})
+@Component(modules = {PresenterMappingModule.class, ModelMappingModule.class})
 public interface MainComponent {
     void inject(SplashActivity activity);
 

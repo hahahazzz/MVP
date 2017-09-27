@@ -61,9 +61,8 @@ public abstract class BaseFragment extends Fragment implements BaseContract.View
         if (contentView == null) {
             contentView = inflater.inflate(getLayoutResId(), container, false);
             ButterKnife.bind(this, contentView);
-            basePresenter = Preconditions.checkNotNull(injectPresenter(DaggerMainComponent.builder().apiComponent
-                    (App.getApp().getApiComponent()).build()));
-            basePresenter.attachView(this);
+            basePresenter = Preconditions.checkNotNull(injectPresenter(DaggerMainComponent.builder().build()));
+            basePresenter.attachViewAndLinkModel(this);
             start();
             basePresenter.start();
         }

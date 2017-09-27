@@ -12,7 +12,7 @@ import java.util.HashMap;
  * Created by QiuGang on 2017/9/24 18:22
  * Email : 1607868475@qq.com
  */
-public abstract class OkHttpResponseHandler<T> implements ResponseHandler {
+public abstract class OkHttpResponseHandler<T> implements ResponseHandler<T> {
     private boolean ok = false;
     private HashMap<String, Object> tagMap;
     private Class<T> dataClass;

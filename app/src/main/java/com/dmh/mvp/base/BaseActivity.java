@@ -52,9 +52,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseCont
         ButterKnife.bind(this);
         activity = this;
         ActivityUtils.get().add(this);
-        basePresenter = Preconditions.checkNotNull(injectPresenter(DaggerMainComponent.builder().apiComponent
-                (App.getApp().getApiComponent()).build()));
-        basePresenter.attachView(this);
+        basePresenter = Preconditions.checkNotNull(injectPresenter(DaggerMainComponent.builder().build()));
+        basePresenter.attachViewAndLinkModel(this);
         start();
         basePresenter.start();
     }
