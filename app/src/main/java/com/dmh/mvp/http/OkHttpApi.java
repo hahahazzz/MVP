@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
 
 import com.dmh.mvp.BuildConfig;
 import com.dmh.mvp.base.App;
@@ -109,7 +110,14 @@ public class OkHttpApi implements Api {
         addTokenToParams(params);
         if (params != null && params.size() > 0) {
             for (Map.Entry<String, String> entry : params.entrySet()) {
-                multipartBodyBuilder.addFormDataPart(entry.getKey(), entry.getValue());
+                String key = entry.getKey();
+                String value = entry.getValue();
+                if (TextUtils.isEmpty(key) || TextUtils.isEmpty(value)) {
+                    LogUtils.w(String.format("An unexpected Null parameter appears in the request[POST %s] " +
+                            "parameter:key=%s and value=%s", url, key, value));
+                    continue;
+                }
+                multipartBodyBuilder.addFormDataPart(key, value);
             }
         }
         url = checkUrlPrefix(url);
@@ -149,7 +157,14 @@ public class OkHttpApi implements Api {
         StringBuilder paramsBuilder = new StringBuilder(url);
         paramsBuilder.append("?");
         for (Map.Entry<String, String> entry : params.entrySet()) {
-            paramsBuilder.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (TextUtils.isEmpty(key) || TextUtils.isEmpty(value)) {
+                LogUtils.w(String.format("An unexpected Null parameter appears in the request[GET %s] " +
+                        "parameter:key=%s and value=%s", url, key, value));
+                continue;
+            }
+            paramsBuilder.append(key).append("=").append(value).append("&");
         }
         return paramsBuilder.substring(0, paramsBuilder.length() - 1);
     }
