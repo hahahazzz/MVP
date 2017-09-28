@@ -345,7 +345,7 @@ public class OkHttpApi implements Api {
 
             String requestName = Request.class.getSimpleName();
             String requestUrl = request.url().toString();
-            String requestMethod = request.body().toString();
+            String requestMethod = request.method();
 
             String responseName = Response.class.getSimpleName();
             int responseCode = response.code();
