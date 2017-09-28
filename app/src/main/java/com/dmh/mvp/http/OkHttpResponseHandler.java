@@ -4,6 +4,7 @@ import android.widget.Toast;
 
 import com.dmh.mvp.R;
 import com.dmh.mvp.base.App;
+import com.google.gson.JsonObject;
 
 import java.net.HttpURLConnection;
 import java.util.HashMap;
@@ -16,6 +17,10 @@ public abstract class OkHttpResponseHandler<T> implements ResponseHandler<T> {
     private boolean ok = false;
     private HashMap<String, Object> tagMap;
     private Class<T> dataClass;
+
+    public OkHttpResponseHandler() {
+        this((Class<T>) JsonObject.class);
+    }
 
     public OkHttpResponseHandler(Class<T> dataClass) {
         if (dataClass == null) {

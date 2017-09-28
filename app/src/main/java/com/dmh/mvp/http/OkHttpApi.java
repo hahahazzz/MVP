@@ -8,6 +8,7 @@ import android.support.v4.util.ArrayMap;
 
 import com.dmh.mvp.BuildConfig;
 import com.dmh.mvp.base.App;
+import com.dmh.mvp.util.LogUtils;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ import javax.net.ssl.X509TrustManager;
 import okhttp3.Call;
 import okhttp3.Dispatcher;
 import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -93,11 +95,32 @@ public class OkHttpApi implements Api {
         jsonParse = new Gson();
     }
 
-    private <T> void get(String url, Object tag, ResponseHandler<T> handler) {
+    @Override
+    public <T> void post(String url, Object tag, ArrayMap<String, String> params, ResponseHandler<T> handler) {
+        MultipartBody.Builder multipartBodyBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if (tag != null) {
+            if (tag instanceof ArrayMap) {
+                throw new RuntimeException();
+            }
+        }
+        addTokenToParams(params);
+        if (params != null && params.size() > 0) {
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                multipartBodyBuilder.addFormDataPart(entry.getKey(), entry.getValue());
+            }
+        }
+        url = checkUrlPrefix(url);
+        Request.Builder reqBuilder = new Request.Builder().url(url).post(multipartBodyBuilder.build());
+        executeRequest(reqBuilder.build(), handler);
+    }
+
+    @Override
+    public <T> void get(String url, Object tag, ResponseHandler<T> handler) {
         get(url, tag, null, handler);
     }
 
-    private <T> void get(String url, Object tag, ArrayMap<String, String> params, ResponseHandler<T> handler) {
+    @Override
+    public <T> void get(String url, Object tag, ArrayMap<String, String> params, ResponseHandler<T> handler) {
         url = checkUrlPrefix(url);
         url = addParamsToUrl(url, params);
         Request.Builder requestBuilder = new Request.Builder().url(url).get();
@@ -108,6 +131,9 @@ public class OkHttpApi implements Api {
             requestBuilder.tag(tag.getClass().getName());
         }
         executeRequest(requestBuilder.build(), handler);
+    }
+
+    private void addTokenToParams(ArrayMap<String, String> params) {
     }
 
     private String addParamsToUrl(String url, ArrayMap<String, String> params) {
@@ -339,7 +365,8 @@ public class OkHttpApi implements Api {
             logBuilder.append(LINE_SEPARATOR);
             logBuilder.append(TAB);
             logBuilder.append("body=").append(responseBody);
-            return response.newBuilder().body(ResponseBody.create(response.body().contentType(), requestMethod))
+            LogUtils.d(logBuilder.toString());
+            return response.newBuilder().body(ResponseBody.create(response.body().contentType(), responseBody))
                     .build();
         }
     }
