@@ -103,6 +103,9 @@ public class OkHttpApi implements Api {
                 throw new RuntimeException();
             }
         }
+        if (params == null) {
+            params = new ArrayMap<>();
+        }
         addTokenToParams(params);
         if (params != null && params.size() > 0) {
             for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -122,6 +125,9 @@ public class OkHttpApi implements Api {
     @Override
     public <T> void get(String url, Object tag, ArrayMap<String, String> params, ResponseHandler<T> handler) {
         url = checkUrlPrefix(url);
+        if (params == null) {
+            params = new ArrayMap<>();
+        }
         url = addParamsToUrl(url, params);
         Request.Builder requestBuilder = new Request.Builder().url(url).get();
         if (tag != null) {
