@@ -3,6 +3,9 @@ package com.dmh.mvp.util;
 import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
 
+import com.dmh.mvp.http.Api;
+import com.dmh.mvp.http.OkHttpApi;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -96,6 +99,7 @@ public final class ActivityUtils {
             AppCompatActivity removeActivity = activityStack.remove(0);
             removeActivity.finish();
         }
+        OkHttpApi.getApi().cancelRequest(Api.TAG_CANCEL_ALL_REQUEST);
         ThreadPool.shutdownNow();
         Process.killProcess(Process.myPid());
         System.exit(0);

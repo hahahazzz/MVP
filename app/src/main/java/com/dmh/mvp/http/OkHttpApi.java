@@ -242,7 +242,12 @@ public class OkHttpApi implements Api {
                             String bodyContent = response.body().string();
                             responseHandler.setOk(true);
                             final ApiResponse apiResponse = jsonParse.fromJson(bodyContent, ApiResponse.class);
-                            final T data = jsonParse.fromJson(apiResponse.getData(), responseHandler.getDataClass());
+                            final T data;
+                            if (apiResponse == null || TextUtils.isEmpty(apiResponse.getResult())) {
+                                data = null;
+                            } else {
+                                data = jsonParse.fromJson(apiResponse.getResult(), responseHandler.getDataClass());
+                            }
                             resultCallbackHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -335,6 +340,10 @@ public class OkHttpApi implements Api {
     static class LogInterceptor implements Interceptor {
         private final static String LINE_SEPARATOR = "\n";
         private final static String TAB = "\t";
+
+        private static final String requestName = Request.class.getSimpleName();
+        private static final String responseName = Response.class.getSimpleName();
+
         private static volatile LogInterceptor interceptor;
 
         private LogInterceptor() {}
@@ -358,11 +367,9 @@ public class OkHttpApi implements Api {
             Request request = chain.request();
             Response response = chain.proceed(request);
 
-            String requestName = Request.class.getSimpleName();
             String requestUrl = request.url().toString();
             String requestMethod = request.method();
 
-            String responseName = Response.class.getSimpleName();
             int responseCode = response.code();
             String responseMessage = response.message();
             String responseBody = response.body().string();
@@ -371,10 +378,9 @@ public class OkHttpApi implements Api {
             logBuilder.append(requestName);
             logBuilder.append(LINE_SEPARATOR);
             logBuilder.append(TAB);
-            logBuilder.append(requestUrl);
-            logBuilder.append(LINE_SEPARATOR);
-            logBuilder.append(TAB);
             logBuilder.append(requestMethod);
+            logBuilder.append(TAB);
+            logBuilder.append(requestUrl);
             logBuilder.append(LINE_SEPARATOR);
 
             logBuilder.append(responseName);
@@ -383,9 +389,9 @@ public class OkHttpApi implements Api {
             logBuilder.append("code=").append(responseCode);
             logBuilder.append(TAB);
             logBuilder.append("message=").append(responseMessage);
-            logBuilder.append(LINE_SEPARATOR);
             logBuilder.append(TAB);
-            logBuilder.append("body=").append(responseBody);
+            logBuilder.append("body=");
+            logBuilder.append(LINE_SEPARATOR).append(responseBody);
             LogUtils.d(logBuilder.toString());
             return response.newBuilder().body(ResponseBody.create(response.body().contentType(), responseBody))
                     .build();
