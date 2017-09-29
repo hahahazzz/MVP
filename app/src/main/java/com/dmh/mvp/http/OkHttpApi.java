@@ -243,7 +243,8 @@ public class OkHttpApi implements Api {
                             responseHandler.setOk(true);
                             final ApiResponse apiResponse = jsonParse.fromJson(bodyContent, ApiResponse.class);
                             final T data;
-                            if (apiResponse == null || apiResponse.getResult() == null) {
+                            if (apiResponse == null || apiResponse.getResult() == null || (apiResponse.getResult()
+                                    instanceof JsonNull)) {
                                 data = null;
                             } else {
                                 data = jsonParse.fromJson(apiResponse.getResult(), responseHandler.getDataClass());
