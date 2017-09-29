@@ -1,12 +1,14 @@
 package com.dmh.mvp.http;
 
+import com.google.gson.JsonElement;
+
 /**
  * Created by QiuGang on 2017/9/24 22:23
  * Email : 1607868475@qq.com
  */
 public class ApiResponse {
     private int code;
-    private String result;
+    private JsonElement result;
     private String msg;
 
     public int getCode() {
@@ -17,11 +19,11 @@ public class ApiResponse {
         this.code = code;
     }
 
-    public String getResult() {
+    public JsonElement getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(JsonElement result) {
         this.result = result;
     }
 
